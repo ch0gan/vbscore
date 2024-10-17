@@ -87,18 +87,26 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: none;
+    flex-direction: column;
+    /*border: none;*/
     color: white;
     cursor: pointer;
     font-size: 30vw; /* 20% of the viewport width */
+    border: 0px solid purple;
 }
 
+.score-button:focus {
+    text-decoration: underline
+}
+/*
     .score-button span {
-        display: inline-block;
+        //display: inline-block;
+        display: block;
         max-height: 80%;
         max-width: 80%;
-        font-size: 1em; /* This will scale with the button size */
+        font-size: 1em;
     }
+*/
 
 .blue {
     background-color: blue;
@@ -122,16 +130,28 @@ html, body {
     }
 }
 
-#lblTeam1 {
-    position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+#teamName {
+    font-size: .1em;
+/*
+    position: relative;
+    top: -25%;
+    left: 24%;
+*/
+    flex: 100px 1 
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
+}
+
+.switcher {
+    position:absolute;
+    width: 50px;
+    height: 50px;
+
+/*    removing top and left allows the object to be in the center
+    top: 48%;
+    left: 47.5%;
+    background-color: purple;
+*/
+    z-index: 8;
 }

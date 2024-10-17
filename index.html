@@ -6,6 +6,7 @@
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <title>Volleyball Scoring</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
@@ -20,7 +21,7 @@
                 <option value="rally">Rally</option>
             </select>
             <div class="score-adjust">
-                <h3>Adjust Scores</h3>
+                <h3>Adjust Scores</h3>  
                 <div>
                     <h4 class="bluelabel">Team A</h4>
                     <button onclick="adjustScore('A', -1)">-</button>
@@ -34,14 +35,20 @@
                     <button onclick="adjustScore('B', 1)">+</button>
                 </div>
             </div>
+            <input type="text" id="team1" placeholder="Team A" onchange="updateTeamAName">
+            <input type="text" id="team2" placeholder="Team B" onchange="updateTeamBName">
             <button onclick="resetScores()">Reset</button>
         </div>
     </div>
-    <div id="lblTeam1"></div>
+    
     <div id="lblTeam2"></div>
-    <div class="container">
-        <button id="scoreA" class="score-button blue" onclick="increaseScore('A')"><span>0</span></button>
-        <button id="scoreB" class="score-button red" onclick="increaseScore('B')"><span>0</span></button>
+
+    <div class="switcher" onclick="switchDivs()"><i style="font-size:50px;color:darkgray" class="fa">&#xf021;</i></div>
+
+    <div class="container"> 
+
+        <button id="scoreA" class="score-button blue" onclick="increaseScore('A')"><div name="team1" id="teamName">test 1</div><span>0</span></button>
+        <button id="scoreB" class="score-button red" onclick="increaseScore('B')"><div name="team2" id="teamName">test 2</div><span>0</span></button>
     </div>
     <script src="script.js"></script>
 </body>
