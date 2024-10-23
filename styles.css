@@ -1,4 +1,4 @@
-﻿* {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -136,9 +136,9 @@ html, body {
     position: relative;
     top: -25%;
     left: 24%;
-*/
-    flex: 100px 1 
+    flex: 100px 1; 
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
 }
