@@ -1,3 +1,4 @@
+//testing commit without pull
 // set global variables
 let scoreA = 0;
 let scoreB = 0;
