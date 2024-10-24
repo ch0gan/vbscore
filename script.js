@@ -59,10 +59,12 @@ function increaseScore(team) {
        if (team === 'A') {
            scoreA++;
            scoreAElement.innerText = scoreA;
-       } else if (team === 'B') {
+           servingTeam = teamA_serve;
+        } else if (team === 'B') {
            scoreB++;
            scoreBElement.innerText = scoreB;
-       }
+           servingTeam = teamB_serve;
+        }
    }
   
    //if (team === 'A') {
