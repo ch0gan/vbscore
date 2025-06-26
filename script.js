@@ -5,32 +5,41 @@ let scoreB = 0;
 const teamA_serve = 1;
 const teamB_serve = 2;
 let servingTeam = 0;
-let teamAName = "Team 1";
-let teamBName = "Team 2";
+let teamAName = "";
+let teamBName = "";
 //let servingTeam = null; /* 'A';   null for now and assumes we don't know who is serving */
 let strScoreType = document.getElementById('scoringType').value;
 let isSwitched = false; // used to track if the teams have been switched
 
 
 function updateTeamNames() {
-    document.getElementsByName('team1')[0].innerHTML = teamAName;
-    document.getElementsByName('team2')[0].innerHTML = teamBName;
-    document.getElementById('team1').value = teamAName; // Set input value
-    document.getElementById('team2').value = teamBName; // Set input value
+    document.getElementsByName('team1')[0].innerHTML = teamAName || "Team A";
+    document.getElementsByName('team2')[0].innerHTML = teamBName || "Team B";
+    document.getElementById('team1').value = teamAName;
+    document.getElementById('team2').value = teamBName;
+
 }
 // set the default team names using the global variables
 updateTeamNames();
 
 function updateTeamAName() {
     const input = document.getElementById('team1');
-    teamAName = input.value || 'Team 1';
+    if (input.value.trim() === "") {
+        teamAName = "";
+    } else {
+        teamAName = input.value;
+    }
     updateTeamNames();
     saveState();
 }
 
 function updateTeamBName() {
     const input = document.getElementById('team2');
-    teamBName = input.value || 'Team 2';
+    if (input.value.trim() === "") {
+        teamBName = "";
+    } else {
+        teamBName = input.value;
+    }
     updateTeamNames();
     saveState();
 }
@@ -208,8 +217,8 @@ function loadState() {
     if (state) {
         scoreA = state.scoreA || 0;
         scoreB = state.scoreB || 0;
-        teamAName = state.teamAName || "Team 1";
-        teamBName = state.teamBName || "Team 2";
+        teamAName = state.teamAName || "";
+        teamBName = state.teamBName || "";
         servingTeam = state.servingTeam || 0;
         document.getElementById('scoringType').value = state.scoringType || 'sideout';
         isSwitched = state.isSwitched || false;
