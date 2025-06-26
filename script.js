@@ -13,8 +13,10 @@ let isSwitched = false; // used to track if the teams have been switched
 
 
 function updateTeamNames() {
-   document.getElementsByName('team1')[0].innerHTML = teamAName;
-   document.getElementsByName('team2')[0].innerHTML = teamBName;
+    document.getElementsByName('team1')[0].innerHTML = teamAName;
+    document.getElementsByName('team2')[0].innerHTML = teamBName;
+    document.getElementById('team1').value = teamAName; // Set input value
+    document.getElementById('team2').value = teamBName; // Set input value
 }
 // set the default team names using the global variables
 updateTeamNames();
