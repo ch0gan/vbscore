@@ -36,7 +36,7 @@ html, body {
 }
 
 .menu-content {
-    background: white;
+/*    background: white;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -44,12 +44,35 @@ html, body {
     max-width: 200px;
     display: flex;
     flex-direction: column;
+    gap: 20px;*/
+    position: relative;
+    background: white;
+    padding: 40px 20px 20px 20px; /* More top padding for the X */
+    border-radius: 10px;
+    text-align: center;
+    width: 90vw;
+    max-width: 250px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+    overflow-y: auto; /* Allow scrolling if needed */
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .menu-header {
+    /*display: flex;
+    justify-content: flex-end; */
+    width: 100%;
     display: flex;
     justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px 0 0;
+    box-sizing: border-box;
 }
 
 .menu-close {
@@ -154,4 +177,33 @@ html, body {
     background-color: purple;
 */
     z-index: 8;
+}
+
+/*Drop down menu for Side Out vs Rally*/
+#scoringType {
+    width: 100%;
+    max-width: 150px; /* Adjust as needed */
+    margin: 0 auto 10px auto;
+    font-size: 1em;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    display: block;
+}
+
+/* Input fields for team names */
+#team1,
+#team2 {
+    width: 80%;           /* Make input fields narrower */
+    max-width: 180px;     /* Prevent them from being too wide */
+    min-width: 100px;     /* Optional: set a minimum width */
+    height: 44px;         /* Increase height */
+    font-size: 1.2em;     /* Increase font size */
+    padding: 6px 12px;    /* Optional: add padding for better appearance */
+    margin-bottom: 10px;  /* Optional: space between fields */
+    border-radius: 6px;   /* Optional: rounded corners */
+    border: 1px solid #ccc; /* Optional: subtle border */
+    box-sizing: border-box;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
