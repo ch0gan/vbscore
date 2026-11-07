@@ -1,0 +1,7 @@
+#!/bin/sh
+# Runs before every commit: stamps version.js with the current date and time
+# and adds it to the commit. Turn it on once per copy of the repo with:
+#   git config core.hooksPath .githooks
+v=$(date +%Y.%m.%d-%H%M)
+printf "// Set automatically by .githooks/pre-commit each commit. Shown at the bottom of the menu.\nconst APP_VERSION = '%s';\n" "$v" > version.js
+git add version.js

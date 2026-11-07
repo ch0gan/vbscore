@@ -24,35 +24,88 @@
     <div id="menuOverlay" class="menu-overlay">
         <div class="menu-content">
             <div class="menu-header">
+                <h2>Settings</h2>
                 <span class="menu-close" onclick="toggleMenu()">✖</span>
             </div>
-            <label for="scoringType">Scoring Type:</label>
-            <select id="scoringType">
-                <option value="sideout">Side Out</option>
-                <option value="rally">Rally</option>
-            </select>
-            <div class="score-adjust">
-                <h3>Adjust Scores</h3>  
-                <div>
-                    <h4 class="bluelabel">Team A</h4>
-                    <button onclick="adjustScore('A', -1)">-</button>
-                    <span id="adjustScoreA">0</span>
-                    <button onclick="adjustScore('A', 1)">+</button>
+
+            <div class="menu-actions">
+                <button class="menu-btn menu-btn-primary" onclick="openFinalSet()">End Set</button>
+                <button class="menu-btn" onclick="openHistory()">History</button>
+            </div>
+
+            <div class="menu-section scoring-section">
+                <div class="menu-label">Scoring</div>
+                <div class="segmented" role="group" aria-label="Scoring type">
+                    <button id="scoreTypeSideout" onclick="setScoringType('sideout')">Side Out</button>
+                    <button id="scoreTypeRally" onclick="setScoringType('rally')">Rally</button>
                 </div>
-                <div>
-                    <h4 class="redlabel">Team B</h4>
-                    <button onclick="adjustScore('B', -1)">-</button>
-                    <span id="adjustScoreB">0</span>
-                    <button onclick="adjustScore('B', 1)">+</button>
+                <!-- Hidden: holds the chosen scoring type for the rest of the code -->
+                <select id="scoringType" hidden>
+                    <option value="sideout">Side Out</option>
+                    <option value="rally">Rally</option>
+                </select>
+            </div>
+
+            <div class="menu-section teams-section">
+                <div class="menu-label">Teams and score</div>
+                <div class="team-row">
+                    <span class="team-swatch blue"></span>
+                    <input type="text" id="team1" placeholder="Team A" oninput="updateTeamAName()" aria-label="Blue team name">
+                    <button class="step-btn" onclick="adjustScore('A', -1)" aria-label="Blue team minus one">−</button>
+                    <span id="adjustScoreA" class="step-value">0</span>
+                    <button class="step-btn" onclick="adjustScore('A', 1)" aria-label="Blue team plus one">+</button>
+                </div>
+                <div class="team-row">
+                    <span class="team-swatch red"></span>
+                    <input type="text" id="team2" placeholder="Team B" oninput="updateTeamBName()" aria-label="Red team name">
+                    <button class="step-btn" onclick="adjustScore('B', -1)" aria-label="Red team minus one">−</button>
+                    <span id="adjustScoreB" class="step-value">0</span>
+                    <button class="step-btn" onclick="adjustScore('B', 1)" aria-label="Red team plus one">+</button>
                 </div>
             </div>
-            <input type="text" id="team1" placeholder="Team A" oninput="updateTeamAName()">
-            <input type="text" id="team2" placeholder="Team B" oninput="updateTeamBName()">
-            <button onclick="resetScores()">Reset</button>
+
+            <button class="menu-reset" onclick="resetScores()">Reset score</button>
+            <p id="appVersion" class="app-version"></p>
         </div>
     </div>
     
     <div id="lblTeam2"></div>
+
+    <!-- Which set is being played. Tap it for End Set and History. -->
+    <button id="setLabel" class="set-label" onclick="toggleSetMenu()">Set 1</button>
+    <div id="setMenuBackdrop" class="set-menu-backdrop" onclick="closeSetMenu()"></div>
+    <div id="setMenu" class="set-menu">
+        <button onclick="closeSetMenu(); openFinalSet()">End Set</button>
+        <button onclick="closeSetMenu(); openHistory()">History</button>
+    </div>
+
+    <!-- End Set box: save this set, then start the next set or end the match -->
+    <div id="finalOverlay" class="dialog-overlay">
+        <div class="dialog-box">
+            <h3 id="finalTitle">End set 1</h3>
+            <div id="finalGrid"></div>
+            <p id="finalMatch" class="final-match"></p>
+            <div id="finalButtons" class="dialog-buttons">
+                <button class="dialog-btn dialog-btn-primary" onclick="recordSet(false)">Next set</button>
+                <button class="dialog-btn" onclick="recordSet(true)">End match</button>
+                <button class="dialog-btn dialog-btn-plain" onclick="closeFinalSet()">Cancel</button>
+            </div>
+            <div id="finalTiedButtons" class="dialog-buttons">
+                <button class="dialog-btn dialog-btn-primary" onclick="closeFinalSet()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- History page: past matches as line-score grids -->
+    <div id="historyPage" class="dialog-overlay">
+        <div class="history-box">
+            <div class="history-header">
+                <h2>Match history</h2>
+                <span class="menu-close" onclick="closeHistory()">✖</span>
+            </div>
+            <div id="historyList"></div>
+        </div>
+    </div>
 
     <div class="switcher" onclick="switchDivs()"><i style="font-size:50px;color:darkgray" class="fa">&#xf021;</i></div>
 
@@ -61,6 +114,7 @@
         <button id="scoreA" class="score-button blue" onclick="increaseScore('A')"><div name="team1" id="teamName">test 1</div><span>0</span></button>
         <button id="scoreB" class="score-button red" onclick="increaseScore('B')"><div name="team2" id="teamName">test 2</div><span>0</span></button>
     </div>
+    <script src="version.js"></script>
     <script src="script.js"></script>
     <script>
         // Register the service worker so the app works offline

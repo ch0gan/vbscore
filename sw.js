@@ -4,9 +4,11 @@
 // then fetch a fresh copy in the background for next time. So after you push
 // changes, the app shows them the second time it is opened.
 //
-// Bump CACHE_NAME if you ever need to force every phone to drop its old copy.
+// The cache is named after the version in version.js. Each commit gets a new
+// version, so phones save a fresh copy and delete the old one.
+importScripts('version.js');
 const CACHE_PREFIX = 'vbscore-';
-const CACHE_NAME = CACHE_PREFIX + 'v1';
+const CACHE_NAME = CACHE_PREFIX + APP_VERSION;
 
 // The app's own files. All of these must download or the install fails.
 const APP_FILES = [
@@ -14,6 +16,7 @@ const APP_FILES = [
     './index.html',
     './styles.css',
     './script.js',
+    './version.js',
     './manifest.json',
     './icons/icon-192.png',
     './icons/icon-512.png',
