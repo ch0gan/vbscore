@@ -49,15 +49,17 @@ The site must be served over HTTPS for phones to offer the install option.
 
 ### Updating the app
 
-When you push changes, installed apps open the saved copy first and download the new files in the background. The update shows up the **second** time the app is opened.
+When the phone has a connection, the app loads the newest page from the server (waiting up to 3 seconds before falling back to the saved copy). With no connection, it uses the saved copy.
 
-If you add a new file the app needs (for example, a new `.js` or image), add it to the `APP_FILES` list in `sw.js`.
+If you add a new file the app needs (for example, a new `.js` or image), add it to the `APP_FILES` list in `sw.js`. If it can change between versions, also add `?v=` and the version to its address in `index.html`, like `styles.css` and `script.js`.
 
 ### Version number
 
-The bottom of the ☰ menu shows the version, such as `Version 2026.11.06-2156` (year.month.day-hourminute). Use it to check which version a phone is running.
+The bottom of the ☰ menu shows the version, such as `Version 2026.11.06-2230` (year.month.day-hourminute). Use it to check which version a phone is running.
 
-The version lives in `version.js`. A Git hook (`.githooks/pre-commit`) rewrites it with the current date and time on every commit, including commits made in GitHub Desktop. The service worker names its cache after the version, so each new version makes phones save a fresh copy and delete the old one.
+The version is set near the top of `index.html`, and it's also part of the `styles.css`, `script.js`, and `sw.js` addresses (`styles.css?v=2026.11.06-2230`). The site runs through Cloudflare, which keeps copies of CSS and JS files for hours but always fetches `index.html` fresh. Because each version asks for its files at new addresses, Cloudflare and the phone can't mix an old file into a new page.
+
+A Git hook (`.githooks/pre-commit`) replaces every version stamp in `index.html` with the current date and time on each commit, including commits made in GitHub Desktop.
 
 The hook only runs after you turn it on, once for each copy of the repo:
 

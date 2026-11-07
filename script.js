@@ -509,7 +509,7 @@ function updateScoringButtons() {
     document.getElementById('scoreTypeRally').classList.toggle('active', type === 'rally');
 }
 
-// Version stamp at the bottom of the menu (from version.js)
+// Version stamp at the bottom of the menu (APP_VERSION is set in index.html)
 document.getElementById('appVersion').innerText =
     'Version ' + (typeof APP_VERSION !== 'undefined' ? APP_VERSION : 'unknown');
 
